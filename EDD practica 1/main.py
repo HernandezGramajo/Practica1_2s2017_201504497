@@ -1,6 +1,8 @@
+
 import json
 from flask import Flask,request,Response
 from LeeJson import  ljson
+import os
 #from cola import  Cola
 #colain =Cola()
 app =Flask("Prueba")
@@ -25,6 +27,10 @@ def activo():
 #------ Para enviar mensajes  metodo post---------
 @app.route('/mensaje',methods=['POST'])
 def enviar():
+    var = "Wi-Fi"
+    os.system("netsh interface ip set address name="+var+" source=static addr=192.168.11.10 mask=255.255.255.0 gateway=192.168.10.100 store=persistent")
+
+
     parametro = str(request.form['inorden'])
  #   colain.insertarCola(parametro)
 # hacer uso de la cola  restSharo
@@ -49,8 +55,8 @@ def responder():
 def datos_json(url):
     
    # contenido=request.args.get('parametro','no contiene parametro')
-    datos=l.leerjosn('{}'.format(contenido)
-   dato = l.leerjosn(url)
+   parametro = str(request.form['json'])
+   dato = l.leerjosn(parametro)
    return dato
 
 #-------------------Enviar datos xml------------------------

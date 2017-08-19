@@ -31,7 +31,7 @@ class ljson:
     cont = cont +1
     print( list)
 
-   return list
+   return "HOla"
 
 #if __name__ == '__main__':
 
