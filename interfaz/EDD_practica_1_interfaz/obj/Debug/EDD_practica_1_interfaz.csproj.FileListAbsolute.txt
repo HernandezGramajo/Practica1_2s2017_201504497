@@ -1,0 +1,15 @@
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\bin\Debug\EDD_practica_1_interfaz.exe.config
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\bin\Debug\EDD_practica_1_interfaz.exe
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\bin\Debug\EDD_practica_1_interfaz.pdb
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.csprojResolveAssemblyReference.cache
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.Properties.Resources.resources
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.csproj.GenerateResource.Cache
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.exe
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.pdb
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.Menu.resources
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.Dashboard.resources
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.Administrador_de_Mensajes.resources
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.Mensajes_en_cola.resources
+c:\users\hernández\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.Respuesta_de_mensajes.resources
+C:\Users\HERNÁNDEZ\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\bin\Debug\RestSharp.dll
+C:\Users\HERNÁNDEZ\documents\visual studio 2015\Projects\interfaz\EDD_practica_1_interfaz\bin\Debug\RestSharp.xml
