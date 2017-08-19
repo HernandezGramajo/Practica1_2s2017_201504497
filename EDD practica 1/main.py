@@ -57,7 +57,7 @@ def datos_json(url):
    # contenido=request.args.get('parametro','no contiene parametro')
    parametro = str(request.form['json'])
    dato = l.leerjosn(parametro)
-   return dato
+   return dato + "REgreso"
 
 #-------------------Enviar datos xml------------------------
 @app.route('/xml')

@@ -14,8 +14,8 @@ class ljson:
   #  return "conexion ok"
 
 
- def leerjosn (self,ruta):
-  with open(ruta) as data_file:
+ def leerjosn (ruta):
+  with open("nodos1.json") as data_file:
    data = json.load(data_file)
 
    list = []

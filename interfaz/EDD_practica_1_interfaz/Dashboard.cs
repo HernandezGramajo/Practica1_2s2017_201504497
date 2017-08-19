@@ -28,25 +28,28 @@ namespace EDD_practica_1_interfaz
         static string dato = "";
         static string[]  ipnodos  = { "127.0.0.1", "127.0.0.1" } ;
         private void button1_Click(object sender, EventArgs e)
+
+
         {
             string ruta = string.Empty;
             OpenFileDialog abrir = new OpenFileDialog();
             abrir.Filter = "JSON|*.json";
             if (abrir.ShowDialog() == DialogResult.OK)
             {
-                ruta = abrir.SafeFileName;
+                ruta = abrir.FileName;
+                    
             }
 
+           
             // MessageBox.Show(ruta);
             //string archivojson = System.IO.File.ReadAllText(abrir.FileName);
             string datos = cambiaripserver(ruta);
           //  MessageBox.Show("hola " + dato);
         //    llamadaip();
-
-
+       
         }
 
-        public static void llamadaip() {
+        public void llamadaip() {
 
             for (int i = 0; i < ipnodos.Length; i++)
             {
@@ -64,6 +67,9 @@ namespace EDD_practica_1_interfaz
 
                    MessageBox.Show(red.ReadToEnd());
                     //  return red.ToString();
+
+                   DataGriv.Rows.Add("Nodo","IP","Mascara","Estado");
+                
 
                 }
                 catch (Exception ex)
