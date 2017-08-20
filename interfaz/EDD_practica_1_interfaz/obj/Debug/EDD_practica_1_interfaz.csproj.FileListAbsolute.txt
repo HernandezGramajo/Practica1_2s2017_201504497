@@ -13,3 +13,6 @@ C:\Users\HERNÁNDEZ\Documents\GitHub\Practica1_2s2017_201504497\interfaz\EDD_pra
 C:\Users\HERNÁNDEZ\Documents\GitHub\Practica1_2s2017_201504497\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.Properties.Resources.resources
 C:\Users\HERNÁNDEZ\Documents\GitHub\Practica1_2s2017_201504497\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.Respuesta_de_mensajes.resources
 C:\Users\HERNÁNDEZ\Documents\GitHub\Practica1_2s2017_201504497\interfaz\EDD_practica_1_interfaz\obj\Debug\EDD_practica_1_interfaz.csproj.GenerateResource.Cache
+C:\Users\HERNÁNDEZ\Documents\GitHub\Practica1_2s2017_201504497\interfaz\EDD_practica_1_interfaz\bin\Debug\Newtonsoft.Json.dll
+C:\Users\HERNÁNDEZ\Documents\GitHub\Practica1_2s2017_201504497\interfaz\EDD_practica_1_interfaz\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\HERNÁNDEZ\Documents\GitHub\Practica1_2s2017_201504497\interfaz\EDD_practica_1_interfaz\bin\Debug\Newtonsoft.Json.xml

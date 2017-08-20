@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using System.Threading;
 
 using System.Net;
@@ -42,11 +45,20 @@ namespace EDD_practica_1_interfaz
 
            
             // MessageBox.Show(ruta);
-            //string archivojson = System.IO.File.ReadAllText(abrir.FileName);
-            string datos = cambiaripserver(ruta);
-          //  MessageBox.Show("hola " + dato);
-        //    llamadaip();
+           string archivojson = System.IO.File.ReadAllText(abrir.FileName);
+            // string datos = cambiaripserver(ruta);
+            //  MessageBox.Show("hola " + dato);
+            //    llamadaip();
+            dynamic json = JsonConvert.DeserializeObject(archivojson);
+
+
+            //JObject json = new JObject();
+            // json = JObject.Parse(archivojson);
+            MessageBox.Show(json["nodo"].toString());
+            Console.WriteLine(json[""].tostring());
+            
        
+            
         }
 
         public void llamadaip() {
