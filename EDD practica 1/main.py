@@ -4,7 +4,7 @@ from flask import Flask,request,Response
 from LeeJson import  ljson
 import os
 from cola import  Cola
-colain =Cola()
+col =Cola()
 app =Flask("Prueba")
 #----------------Default-----------------------------------------------------------
 l=ljson()
@@ -32,9 +32,9 @@ def activo():
 def enviar():
     parametro= str(request.form['inorden'])
 
-    colain.insertarCola(parametro)
+    col.insertarPrimero(parametro)
 # hacer uso de la cola  restSharo
-    return  "true" + parametro
+    return  "En cola"
 
 
 

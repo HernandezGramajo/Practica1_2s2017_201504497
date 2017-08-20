@@ -1,76 +1,56 @@
+class Nodo:
+    def __init__(self,dato):
+        self.siguiente=None
+        self.anterior=None
+        self.info=dato
 
 
-
-class NodoCola:
-
-    def __init__(self, numero):
-        self.numero = numero
-        self.siguiente = None
+    def verNodo(self):
+        return  self.info
 
 
 class Cola:
 
     def __init__(self):
-        self.cabeza = None
-        self.ultimo = None
+        self.cabeza=None
+        self.cola=None
 
-    def estaVacia(self):
-        if self.cabeza == None:
-            return True
+
+
+    def vacia(self):
+        if self.cabeza==None:
+            return  True
         else:
-            return False
+            return  False
 
-    def insertarCola(self, Nodo):
-        if self.estaVacia() == True:
-            self.cabeza = Nodo
-            self.ultimo = Nodo
-            # self.cabeza.siguiente = self.ultimo
+    def insertarPrimero(self,dato):
+        temporal=Nodo(dato)
+        if self.vacia()==True:
+            self.cabeza=temporal
+            self.cola=temporal
         else:
-            self.ultimo.siguiente = Nodo
-            self.ultimo = Nodo
+            temporal.siguiente=self.cabeza
+            self.cabeza.anterior=temporal
+            self.cabeza=temporal
 
-    def desencolar(self):
-        if self.estaVacia() == True:
-            retornar = "NO HAY NADA"
-            return retornar
+
+
+
+    def listarDesdeCola(self):
+        temporal=self.cola
+        while temporal !=None:
+            print temporal.verNodo()
+            temporal = temporal.anterior
+
+
+
+    def borrarUltimo(self):
+        if self.cola.anterior==None:
+            self.cabeza=None
+            self.cola=None
         else:
-            if self.cabeza == self.ultimo:
-                retorno = self.cabeza.numero
-                self.cabeza = None
-                self.ultimo = None
-                return retorno
-            else:
-                retorno = self.cabeza.numero
-                self.cabeza = self.cabeza.siguiente
-                return retorno
+            self.cola=self.cola.anterior
+            self.cola.siguiente=None
 
-    def showCola(self):
-        if self.estaVacia() == True:
-            return "Cola Vacía!"
-        else:
-            retorno = ""
-            aux = self.cabeza
-            while aux != self.ultimo.siguiente:
-                retorno = retorno + " | " + str(aux.numero) + " |---->"
-                aux = aux.siguiente
-            return str(retorno)
 
-    def textoParaDot(self):
-        if self.estaVacia() is False:
-            retorno = "digraph g {"
-            aux = self.cabeza
-            while aux is not self.ultimo.siguiente:
-                if aux.siguiente is not None:
-                    retorno = retorno + "\n" + str(aux.numero) + \
-                        "->" + str(aux.siguiente.numero) + ";"
-                else:
-                    retorno = retorno + "\n" + str(aux.numero) + ";"
-                aux = aux.siguiente
-            retorno = retorno + "}"
-            return retorno
 
-l= Cola()
-l.insertarCola(5)
-l.insertarCola(8)
-l.insertarCola(7)
-l.desencolar()

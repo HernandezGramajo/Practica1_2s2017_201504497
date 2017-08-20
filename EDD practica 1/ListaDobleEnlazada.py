@@ -76,8 +76,8 @@ class Lista:
                 temporal = actual.siguiente
                 anterior.siguiente=actual.siguiente
                 temporal.anterior=anterior
-
 if __name__ == "__main__":
+
 
 
  listas = Lista()

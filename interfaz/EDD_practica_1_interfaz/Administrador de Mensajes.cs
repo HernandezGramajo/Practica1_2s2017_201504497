@@ -25,8 +25,8 @@ namespace EDD_practica_1_interfaz
 
 
         static string ipserver = "";
-        static ArrayList msip = new ArrayList();
-        static ArrayList mstex = new ArrayList();
+        ArrayList msip = new ArrayList();
+         ArrayList mstex = new ArrayList();
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -51,21 +51,20 @@ namespace EDD_practica_1_interfaz
 
 
             XDocument documento = XDocument.Load(abrir.FileName);
-
+           
             var ipnodos = from ips in documento.Descendants("mensaje") select ips;
-            int cont = 0;
             
             foreach (var dato in ipnodos.Elements("nodos").Elements("IP"))
             {
 
                 msip.Add(dato.Value);
-                  //  MessageBox.Show(dato.Value);
+                    MessageBox.Show(dato.Value);
                               
             }
-            foreach (var item in ipnodos.Elements("texto"))
+           foreach (var item in ipnodos.Elements("texto"))
             {
                 mstex.Add(item.Value);
-               // MessageBox.Show(item.Value);
+               MessageBox.Show(item.Value);
             }
           
 
@@ -76,7 +75,7 @@ namespace EDD_practica_1_interfaz
 
 
            //llamadapost();
-        Mensajes();
+      Mensajes();
 
 
         }
@@ -88,7 +87,7 @@ namespace EDD_practica_1_interfaz
 
 
 
-        public static void Mensajes() {
+        public void Mensajes() {
 
             for (int i = 0; i < msip.Count; i++)
             {
@@ -115,7 +114,8 @@ namespace EDD_practica_1_interfaz
                 }
 
             }
-
+            msip.Clear();
+            mstex.Clear();
 
         }
 
