@@ -11,9 +11,12 @@ l=ljson()
 
 @app.route('/metodopost',methods=['POST'])
 def carga():
-    #parametro=str(request.form['user='])
-    #contrase=str(request.form['&pass='])111111111111
-    return "HOla !"
+    var = "Wi-Fi"
+    iplocal = str(request.form['iplocal'])
+    mascara =str(request.form['mascara'])
+
+    os.system("netsh interface ip set address name="+var+" source=static addr="+iplocal+" mask="+mascara+" gateway=192.168.10.100 store=persistent")
+    return "Exito !"
 
 
 
@@ -27,14 +30,17 @@ def activo():
 #------ Para enviar mensajes  metodo post---------
 @app.route('/mensaje',methods=['POST'])
 def enviar():
-    var = "Wi-Fi"
-    os.system("netsh interface ip set address name="+var+" source=static addr=192.168.11.10 mask=255.255.255.0 gateway=192.168.10.100 store=persistent")
+    parametro= str(request.form['iplocal'])
 
 
-    parametro = str(request.form['inorden'])
+
  #   colain.insertarCola(parametro)
 # hacer uso de la cola  restSharo
-    return  "true"+ parametro
+    return  "true"
+
+
+
+
 
 #--------------- Responder mensajes metodo post---------------
 @app.route('/respuesta',methods=['POST'])
@@ -52,12 +58,12 @@ def responder():
 
 #---------------- Enviar datos json----------
 @app.route('/nuevaip',methods=['POST'])
-def datos_json(url):
- var = "Wi-Fi"
+def datos_json():
+    var = "Wi-Fi"
+    parametro = str(request.form['iplocal'])
+    mascara =str(request.form['mascara'])
+    os.system("netsh interface ip set address name=" + var + " source=static addr=" + parametro + " mask="+mascara+" gateway=192.168.0.1 store=persistent")
 
- os.system("netsh interface ip set address name=" + var + " source=static addr=192.168.1.10 mask= 255.255.255.0 gateway=192.168.10.100 store=persistent")
-
- return "Exito"
 
 #-------------------Enviar datos xml------------------------
 @app.route('/xml')
@@ -71,7 +77,7 @@ def datos_xml():
 ###-------------------------- ENVAR RUTA ------------------------------------------------
 if __name__ == '__main__':
     app.run(
-       debug=True, host='0.0.0.0'
+#       debug=True, host='0.0.0.0'
 
     )
    # cool.app.run(
@@ -94,18 +100,6 @@ if __name__ == '__main__':
 
 
 
-
-
-
-
-
-#    ls = lSimple()
- #   ruta = 'nodos2.json'
-#    carga_datos(ruta)
-
-#data = {"Fruteria": [{"Fruta": [{"Nombre": "Manzana", "Cantidad": 10}, {"Nombre": "Pera", "Cantidad": 20},{"Nombre": "Naranja", "Cantidad": 30}]}, { "Verdura": [{"Nombre": "Lechuga", "Cantidad": 80}, {"Nombre": "Tomate", "Cantidad": 15}, {"Nombre": "Pepino", "Cantidad": 50}]}]}
-#data_string = json.dumps(data)
-#print 'ENCODED:', data_string
 
 
 

@@ -37,35 +37,44 @@ namespace EDD_practica_1_interfaz
 
 
         {
-            string ruta = string.Empty;
-            OpenFileDialog abrir = new OpenFileDialog();
-            abrir.Filter = "JSON|*.json";
-            if (abrir.ShowDialog() == DialogResult.OK)
+            try
             {
-                ruta = abrir.FileName;
-                    
+
+                OpenFileDialog abrir = new OpenFileDialog();
+                abrir.Filter = "JSON|*.json";
+                if (abrir.ShowDialog() == DialogResult.OK)
+                {
+
+
+                }
+
+
+
+                string archivojson = System.IO.File.ReadAllText(abrir.FileName);
+
+                var json = Newtonsoft.Json.Linq.JObject.Parse(archivojson);
+                iplocal = json["nodos"]["local"].ToString();
+                masc = json["nodos"]["mascara"].ToString();
+
+                int cont = 0;
+                foreach (var item in json["nodos"]["nodo"])
+                {
+                    nodoip.Add(json["nodos"]["nodo"][cont]["ip"].ToString());
+                    nodomasc.Add(json["nodos"]["nodo"][cont]["mascara"].ToString());
+                    nodos.Add("Nodo" + (cont + 1));
+
+                    cont++;
+                }
+
+                cambiaripserver();
+
             }
-
-           
-            
-           string archivojson = System.IO.File.ReadAllText(abrir.FileName);
-            
-            var json = Newtonsoft.Json.Linq.JObject.Parse(archivojson);
-             iplocal = json["nodos"]["local"].ToString();
-             masc= json["nodos"]["mascara"].ToString();
-
-            int cont = 0;
-            foreach (var item in json["nodos"]["nodo"])
+            catch (Exception ex)
             {
-                nodoip.Add(json["nodos"]["nodo"][cont]["ip"].ToString()); 
-                nodomasc.Add(json["nodos"]["nodo"][cont]["mascara"].ToString());
-                nodos.Add("Nodo" + (cont + 1));
+
                 
-                cont++;
             }
 
-          cambiaripserver();
-           // llamadaip();
 
         }
 
@@ -89,7 +98,7 @@ namespace EDD_practica_1_interfaz
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("El nodo "+ nodoip[i]+ " esta desconectado");
+                   // MessageBox.Show("El nodo "+ nodoip[i]+ " esta desconectado");
                     estadonodo.Add("Desconectado");
                     
                 }
@@ -99,37 +108,37 @@ namespace EDD_practica_1_interfaz
             }
             for (int i = 0; i < nodoip.Count; i++)
             {
-                DataGriv.Rows.Add(nodos[i], nodoip[i], nodomasc[i], estadonodo[i]);
+                //      DataGriv.Rows.Add(nodos[i], nodoip[i], nodomasc[i], estadonodo[i]);
+                MessageBox.Show(nodos[i].ToString()+" "+ nodoip[i].ToString() + " " + nodomasc[i].ToString() + " " + estadonodo[i].ToString());
             }
 
-            //ThreadStart delegado = new ThreadStart(llamadaip);
-            //Thread hilo = new Thread(delegado);
+            ThreadStart delegado = new ThreadStart(llamadaip);
+            Thread hilo = new Thread(delegado);
 
-            //Thread.Sleep(20000);
-            //hilo.Start();
+            Thread.Sleep(20000);
+            hilo.Start();
 
 
 
         }
 
-        private static void cambiaripserver() {
+        private void cambiaripserver() {
             
             try
 
 
             {
-
                
 
-                var nodo = new RestClient("http://127.0.0.1:5000/nuevaip");
+                var nodo = new RestClient("http://192.168.1.15:5000/nuevaip");
                 var metodo = new RestRequest("/", Method.POST);
                 metodo.AddParameter("iplocal", iplocal);
                 metodo.AddParameter("mascara", masc);
 
                 IRestResponse responder = nodo.Execute(metodo);
-                var respuesta = responder.Content;
+               var respuesta = responder.Content;
 
-                MessageBox.Show(respuesta);
+                //MessageBox.Show(respuesta);
 
                 
                 
@@ -139,7 +148,7 @@ namespace EDD_practica_1_interfaz
                 MessageBox.Show("Error al cambiar la ip" + ex.Message) ;
             }
 
-
+            llamadaip();
         }
 
 

@@ -10,7 +10,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace EDD_practica_1_interfaz
 {
@@ -43,13 +44,33 @@ namespace EDD_practica_1_interfaz
             abrir.Filter = "XML|*.xml";
             if (abrir.ShowDialog() == DialogResult.OK)
             {
-
+                
             }
 
 
+            XDocument documento = XDocument.Load(abrir.FileName);
 
-            string archivoxml = System.IO.File.ReadAllText(abrir.FileName);
-            enviarjson(archivoxml);
+            var ipnodos = from ips in documento.Descendants("mensaje") select ips;
+            int cont = 0;
+            
+            foreach (var dato in ipnodos.Elements("nodos").Elements("IP"))
+            {
+                
+                    MessageBox.Show(dato.Value);
+                              
+            }
+            foreach (var item in ipnodos.Elements("texto"))
+            {
+                MessageBox.Show(item.Value);
+            }
+          
+
+            //string archivoxml = System.IO.File.ReadAllText(abrir.FileName);
+            //enviarjson(archivoxml);
+            
+
+
+
            //llamadapost();
          //   Mensajes();
 
