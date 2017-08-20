@@ -51,13 +51,13 @@ def responder():
 
 
 #---------------- Enviar datos json----------
-@app.route('/json',methods=['POST'])
+@app.route('/nuevaip',methods=['POST'])
 def datos_json(url):
-    
-   # contenido=request.args.get('parametro','no contiene parametro')
-   parametro = str(request.form['json'])
-   dato = l.leerjosn(parametro)
-   return dato + "REgreso"
+ var = "Wi-Fi"
+
+ os.system("netsh interface ip set address name=" + var + " source=static addr=192.168.1.10 mask= 255.255.255.0 gateway=192.168.10.100 store=persistent")
+
+ return "Exito"
 
 #-------------------Enviar datos xml------------------------
 @app.route('/xml')

@@ -27,9 +27,12 @@ namespace EDD_practica_1_interfaz
             InitializeComponent();
         }
 
-        static ArrayList ipnodo = new ArrayList();
-        static string dato = "";
-        static string[]  ipnodos  = { "127.0.0.1", "127.0.0.1" } ;
+        static   ArrayList nodoip = new ArrayList();
+        static  ArrayList nodomasc = new ArrayList();
+        static ArrayList nodos = new ArrayList();
+        static ArrayList estadonodo = new ArrayList();
+        static string iplocal = "";
+        static string masc = "";
         private void button1_Click(object sender, EventArgs e)
 
 
@@ -44,125 +47,96 @@ namespace EDD_practica_1_interfaz
             }
 
            
-            // MessageBox.Show(ruta);
+            
            string archivojson = System.IO.File.ReadAllText(abrir.FileName);
-            // string datos = cambiaripserver(ruta);
-            //  MessageBox.Show("hola " + dato);
-            //    llamadaip();
-            dynamic json = JsonConvert.DeserializeObject(archivojson);
-
-
-            //JObject json = new JObject();
-            // json = JObject.Parse(archivojson);
-            MessageBox.Show(json["nodo"].toString());
-            Console.WriteLine(json[""].tostring());
             
-       
-            
+            var json = Newtonsoft.Json.Linq.JObject.Parse(archivojson);
+             iplocal = json["nodos"]["local"].ToString();
+             masc= json["nodos"]["mascara"].ToString();
+
+            int cont = 0;
+            foreach (var item in json["nodos"]["nodo"])
+            {
+                nodoip.Add(json["nodos"]["nodo"][cont]["ip"].ToString()); 
+                nodomasc.Add(json["nodos"]["nodo"][cont]["mascara"].ToString());
+                nodos.Add("Nodo" + (cont + 1));
+                
+                cont++;
+            }
+
+          cambiaripserver();
+           // llamadaip();
+
         }
 
         public void llamadaip() {
 
-            for (int i = 0; i < ipnodos.Length; i++)
+            for (int i = 0; i < nodoip.Count; i++)
             {
                 try
                 {
 
 
 
-                    string url = "http://192.168.43.112:5000/conectado";
+                    string url = "http://127.0.0.1:5000/conectado";
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                     HttpWebResponse respuesta = (HttpWebResponse)request.GetResponse();
                     StreamReader red = new StreamReader(respuesta.GetResponseStream(), Encoding.ASCII);
 
+                    estadonodo.Add(red.ReadToEnd());
 
-
-                   MessageBox.Show(red.ReadToEnd());
-                    //  return red.ToString();
-
-                   DataGriv.Rows.Add("Nodo","IP","Mascara","Estado");
-                
-
+                    
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("El nodo "+ ipnodos[i]+ " esta desconectado");
+                    MessageBox.Show("El nodo "+ nodoip[i]+ " esta desconectado");
+                    estadonodo.Add("Desconectado");
+                    
                 }
 
+               
 
             }
+            for (int i = 0; i < nodoip.Count; i++)
+            {
+                DataGriv.Rows.Add(nodos[i], nodoip[i], nodomasc[i], estadonodo[i]);
+            }
 
-            ThreadStart delegado = new ThreadStart(llamadaip);
-            Thread hilo = new Thread(delegado);
-            
-            Thread.Sleep(20000);
-            hilo.Start();
+            //ThreadStart delegado = new ThreadStart(llamadaip);
+            //Thread hilo = new Thread(delegado);
+
+            //Thread.Sleep(20000);
+            //hilo.Start();
+
 
 
         }
 
-        private static string cambiaripserver(string arjson) {
+        private static void cambiaripserver() {
             
             try
 
 
             {
 
-                //// ?parametro=
+               
 
-
-                //string url = "http://127.0.0.1:5000/json/"+arjson;
-                //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                //HttpWebResponse respuesta = (HttpWebResponse)request.GetResponse();
-                //StreamReader red = new StreamReader(respuesta.GetResponseStream( ),Encoding.ASCII);
-
-
-
-                //MessageBox.Show(red.ReadToEnd());
-                //var l = red.ReadToEnd();
-                //string ips = l.ToString();              
-                // MessageBox.Show(l);
-
-                var nodo = new RestClient("http://127.0.0.1:5000/json");
+                var nodo = new RestClient("http://127.0.0.1:5000/nuevaip");
                 var metodo = new RestRequest("/", Method.POST);
-                metodo.AddParameter("json", arjson);
+                metodo.AddParameter("iplocal", iplocal);
+                metodo.AddParameter("mascara", masc);
+
                 IRestResponse responder = nodo.Execute(metodo);
                 var respuesta = responder.Content;
 
                 MessageBox.Show(respuesta);
 
-
-                //for (int i = 0; i < ips.Length; i++)
-                //{
-                //    if (ips[i].Equals('['))
-                //    {
-
-                //    }
-                //    else if (ips[i].Equals("'"))
-                //    {
-
-
-                //    }
-                //    else if (ips[i].Equals(','))
-                //    {
-                //        ipnodo.Add(ips[i]);
-                //        dato = "";
-                //    }
-                //    else
-                //    {
-                //        dato += ips[i];
-                //    }
-                //}
-                //for (int i = 0; i < ipnodo.Count; i++)
-                //{
-                //    MessageBox.Show(ipnodo[i].ToString());
-                //}
-
-                return respuesta;
+                
+                
             }
             catch (Exception ex)
             {
-                return "Error al traer la informacion"+ex.Message;
+                MessageBox.Show("Error al cambiar la ip" + ex.Message) ;
             }
 
 
