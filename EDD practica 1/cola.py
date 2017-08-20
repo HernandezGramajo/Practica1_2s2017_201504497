@@ -1,4 +1,4 @@
- graphviz as gv
+
 
 
 class NodoCola:
@@ -69,17 +69,8 @@ class Cola:
             retorno = retorno + "}"
             return retorno
 
-    def grafo(self):
-        if self.estaVacia() is False:
-            g1 = gv.Graph(format='png')
-            aux = self.cabeza
-            while aux is not self.ultimo.siguiente:
-                if aux.siguiente is not None:
-                    g1.node(aux.numero)
-                    g1.node(aux.siguiente.numero)
-                    g1.edge(aux.numero, aux.siguiente.numero)
-                else:
-                    g1.node(aux.numero)
-                aux = aux.siguiente
-            rfilename = g1.render(filename='Cola')
-            return rfilename
+l= Cola()
+l.insertarCola(5)
+l.insertarCola(8)
+l.insertarCola(7)
+l.desencolar()

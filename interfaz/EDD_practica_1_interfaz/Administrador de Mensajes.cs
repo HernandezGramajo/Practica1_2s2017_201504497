@@ -1,5 +1,6 @@
 ﻿using RestSharp;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,7 +25,8 @@ namespace EDD_practica_1_interfaz
 
 
         static string ipserver = "";
-
+        static ArrayList msip = new ArrayList();
+        static ArrayList mstex = new ArrayList();
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -55,13 +57,15 @@ namespace EDD_practica_1_interfaz
             
             foreach (var dato in ipnodos.Elements("nodos").Elements("IP"))
             {
-                
-                    MessageBox.Show(dato.Value);
+
+                msip.Add(dato.Value);
+                  //  MessageBox.Show(dato.Value);
                               
             }
             foreach (var item in ipnodos.Elements("texto"))
             {
-                MessageBox.Show(item.Value);
+                mstex.Add(item.Value);
+               // MessageBox.Show(item.Value);
             }
           
 
@@ -72,7 +76,7 @@ namespace EDD_practica_1_interfaz
 
 
            //llamadapost();
-         //   Mensajes();
+        Mensajes();
 
 
         }
@@ -86,62 +90,35 @@ namespace EDD_practica_1_interfaz
 
         public static void Mensajes() {
 
-            string inorden = "(2+7)*3";
-            string ipnodo = "127.0.0.1";
-            // falta un for para que haga todas las peticiones
-            try
+            for (int i = 0; i < msip.Count; i++)
             {
-
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://" + ipnodo + ":5000/mensaje");
-                httpWebRequest.ContentType = "application/x-www-form-urlencoded; charset=utf-8";
-                httpWebRequest.Method = "POST";
-
-                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                try
                 {
-                    // enviando operacion inorden
-                    string obj = inorden;
-                    streamWriter.Write(obj);
-                    streamWriter.Flush();
-                    streamWriter.Close();
+
+                    var nodo = new RestClient("http://127.0.0.1:5000/mensaje");
+                    var metodo = new RestRequest("/", Method.POST);
+
+                    metodo.AddParameter("inorden", mstex[i]);
+                    IRestResponse responder = nodo.Execute(metodo);
+                    var respuesta = responder.Content;
+
+                    MessageBox.Show(respuesta.ToString());
+
 
 
                 }
-
-                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                catch (Exception ex)
                 {
-                    var result = streamReader.ReadToEnd();
-                    MessageBox.Show("Solicitud al nodo"+ipnodo +"  "+result);
+
+                    MessageBox.Show("La peticion de mensaje fue rechazada por el nodo " );
 
                 }
 
-
-
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show("La peticion de mensaje fue rechazada por el nodo "+ipnodo );
-            
             }
 
 
-            }
-
-
-
-        private void enviarjson(string dirreccion) {
-
-            var nodo = new RestClient("http://127.0.0.1:5000/mensaje");
-            var metodo = new RestRequest("/", Method.POST);
-            string par = "(2+3)-7";
-            metodo.AddParameter("inorden", par);
-            IRestResponse responder = nodo.Execute(metodo);
-            var respuesta = responder.Content;
-
-            MessageBox.Show(respuesta);
         }
-        
+
 
 
 
@@ -191,174 +168,6 @@ namespace EDD_practica_1_interfaz
                 MessageBox.Show("Error :" + ex.Message);
             }
 
-
-
-
-
-
-
-
-
-            //    //try
-            //    //{
-
-
-
-
-            //    string user = "usuario";
-            //    string contra = "contraseña";
-
-            //    ASCIIEncoding encoding = new ASCIIEncoding();
-            //    string postData = "user=" + user + "&pass=" + contra;
-            //    byte[] data = encoding.GetBytes(postData);
-
-            //    WebRequest request = WebRequest.Create("http://127.0.0.1:5000/metodopost");
-            //    request.Method = "POST";
-            //    request.ContentType = "application/x-www-form-urlencoded";
-            //    request.ContentLength = data.Length;
-
-            //    Stream stream = request.GetRequestStream();
-            //    stream.Write(data, 0, data.Length);
-            //    stream.Close();
-
-            ////    WebResponse response = request.GetResponse();
-            ////    stream = response.GetResponseStream();
-            ////MessageBox.Show(stream.ToString());
-
-            //HttpWebResponse respuest = (HttpWebResponse)request.GetResponse();
-            //StreamReader redp = new StreamReader(respuest.GetResponseStream(),Encoding.ASCII);
-
-            //MessageBox.Show(redp.ReadToEnd());
-         
-
-
-
-
-            //using (StreamReader read = new StreamReader(stream, Encoding.ASCII))
-            //{
-            //    String asciiSrt = read.ReadToEnd();
-            //    Byte[] asciidata = Encoding.ASCII.GetBytes(asciiSrt);
-            //    MessageBox.Show(asciiSrt);
-            //}
-
-            //StreamReader sr = new StreamReader(stream);
-            //   MessageBox.Show.ReadToEnd());
-
-            //sr.Close();
-            //stream.Close();
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("HA ocurrido un error :" + ex.Message);
-
-            //}
-
-
-
-
-
-
-
-
-            //        byte[] data = Encoding.ASCII.GetBytes(
-            //$"username={"dia"}&password={"hola"}");
-
-            //        WebRequest request = WebRequest.Create("http://127.0.0.1:5000/metodopost");
-            //        request.Method = "POST";
-            //        request.ContentType = "application/x-www-form-urlencoded";
-            //        request.ContentLength = data.Length;
-            //        using (Stream stream = request.GetRequestStream())
-            //        {
-            //            stream.Write(data, 0, data.Length);
-            //        }
-
-            //        string responseContent = null;
-
-            //        using (WebResponse response = request.GetResponse())
-            //        {
-            //            using (Stream stream = response.GetResponseStream())
-            //            {
-            //                using (StreamReader sr99 = new StreamReader(stream))
-            //                {
-            //                    responseContent = sr99.ReadToEnd();
-            //                }
-            //            }
-            //        }
-
-            //MessageBox.Show(responseContent);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //// Create a request using a URL that can receive a post. 
-            //WebRequest request = WebRequest.Create("http://127.0.0.1:5000/metodopost");
-            //// Set the Method property of the request to POST.
-            //request.Method = "POST";
-            //// Create POST data and convert it to a byte array.
-            //string postData = "This is a test that posts this string to a Web server.";
-            //byte[] byteArray = Encoding.ASCII.GetBytes(postData);
-            //// Set the ContentType property of the WebRequest.
-            //request.ContentType = "application/x-www-form-urlencoded";
-            //// Set the ContentLength property of the WebRequest.
-            //request.ContentLength = byteArray.Length;
-            //// Get the request stream.
-            //Stream dataStream = request.GetRequestStream();
-            //// Write the data to the request stream.
-            //dataStream.Write(byteArray, 0, byteArray.Length);
-            //// Close the Stream object.
-            ////dataStream.Close();
-            //// Get the response.
-            //WebResponse response = request.GetResponse();
-            //// Display the status.
-            //Console.WriteLine(((HttpWebResponse)response).StatusDescription);
-            //// Get the stream containing content returned by the server.
-            //dataStream = response.GetResponseStream();
-            //// Open the stream using a StreamReader for easy access.
-            //StreamReader reader = new StreamReader((System.IO.Stream)dataStream);
-            //// Read the content.
-            //string responseFromServer = reader.ReadToEnd();
-            //// Display the content.
-
-
-            //Console.WriteLine(responseFromServer);                              
-            //MessageBox.Show(responseFromServer);
-            //// Clean up the streams.
-
-
-
-
-
-
-
-
-
-
-
-
-            //   return "";
 
         }
 
