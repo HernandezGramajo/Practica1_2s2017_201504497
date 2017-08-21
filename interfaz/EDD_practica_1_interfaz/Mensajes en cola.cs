@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,16 +13,20 @@ using System.Windows.Forms;
 
 namespace EDD_practica_1_interfaz
 {
-    public partial class Mensajes_en_cola : Form
+    public partial class Mensajes_en_cola : Form 
     {
         public Mensajes_en_cola()
         {
             InitializeComponent();
         }
 
+       
+
+
         private void button1_Click(object sender, EventArgs e)
         {
-            operar();
+            respuesta();
+            //operar();
         }
 
 
@@ -30,44 +35,32 @@ namespace EDD_practica_1_interfaz
             // opero los mensajes en cola y luego voy llamando al metdo para reponder
             //la cola tiene que estar visualizada en graphviz y tiene que 
             //irse actulizando cuando se vaya operado  hasta vaciarse
+            
+
+
+
+
+
+
             respuesta();
 
         }
 
         public static void respuesta() {
 
-            // hay que guardar la ip de la persona que nos hiso el mensaje junto con e mensaje para responderles
-
-
-
-            string tresmensajes = "inorden , post orden ,resultado";
-            string ipnodores = "127.0.0.1";
-            // falta un for para que responda todas las peticiones
             try
-            {
+            {           // cambiar la ip con la que nos dan
 
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://" + ipnodores + ":5000/respuesta");
-                httpWebRequest.ContentType = "application/x-www-form-urlencoded; charset=utf-8";
-                httpWebRequest.Method = "POST";
+                var nodo = new RestClient("http://127.0.0.1:5000/resultado");
+                var metodo = new RestRequest("/", Method.POST);
 
-                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                {
-                    // enviando operacion inorden
-                    string obj = tresmensajes;
-                    streamWriter.Write(obj);
-                    streamWriter.Flush();
-                    streamWriter.Close();
+                metodo.AddParameter("inorden", "((21-17)+ (4*2))");
+                metodo.AddParameter("postorden", "2 17 - 4 2 * +");
+                metodo.AddParameter("resultado", "12");
+                IRestResponse responder = nodo.Execute(metodo);
+                var respuesta = responder.Content;
 
-
-                }
-
-                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-                    MessageBox.Show("Solicitud al nodo" + ipnodores + "  " + result);
-
-                }
+                MessageBox.Show(respuesta.ToString());
 
 
 
@@ -75,10 +68,9 @@ namespace EDD_practica_1_interfaz
             catch (Exception ex)
             {
 
-                 MessageBox.Show("La resultado fue rechazada por el nodo  "+ ipnodores+"  "+ ex.Message);
+                MessageBox.Show("La peticion de mensaje fue rechazada por el nodo ");
 
             }
-
 
 
 

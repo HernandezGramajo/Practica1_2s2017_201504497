@@ -10,6 +10,7 @@ class Nodo:
 
 
 class Cola:
+    global cont
 
     def __init__(self):
         self.cabeza=None
@@ -28,6 +29,7 @@ class Cola:
         if self.vacia()==True:
             self.cabeza=temporal
             self.cola=temporal
+
         else:
             temporal.siguiente=self.cabeza
             self.cabeza.anterior=temporal

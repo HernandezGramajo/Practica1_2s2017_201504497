@@ -5,6 +5,8 @@ from LeeJson import  ljson
 import os
 from cola import  Cola
 col =Cola()
+from ListaDobleEnlazada import Lista
+listd = Lista()
 app =Flask("Prueba")
 #----------------Default-----------------------------------------------------------
 l=ljson()
@@ -43,13 +45,15 @@ def enviar():
 #--------------- Responder mensajes metodo post---------------
 @app.route('/respuesta',methods=['POST'])
 def responder():
-    # parametro = str(request.form['inorden'])
-     #parametro1 = str(request.form['postorden'])
-     #parametro2 = str(request.form['resultado'])
-
+     parametro = str(request.form['inorden'])
+     parametro1 = str(request.form['postorden'])
+     parametro2 = str(request.form['resultado'])
+     contenido = parametro + ","+ parametro1 +","+parametro2
+     listd.insertarPrimero(contenido)
     # saco los datos des pues de haberlos pasado e  la pila y
     #el se almacenan en una lista doble
      return "true"
+
 
 
 
