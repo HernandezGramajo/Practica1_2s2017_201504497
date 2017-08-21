@@ -7,6 +7,9 @@ from cola import  Cola
 col =Cola()
 from ListaDobleEnlazada import Lista
 listd = Lista()
+from Arboles_Binarios import Arbol
+ordenacion =Arbol(None,"")
+
 app =Flask("Prueba")
 #----------------Default-----------------------------------------------------------
 l=ljson()
@@ -39,9 +42,27 @@ def enviar():
     return  "En cola"
 
 
+#---------------- sacar dato y eliminar de la cola el mensaje
+@app.route('/sacarcola',methods=['POST'])
+def sacar():
 
+    obtener =col.listarDesdeCola()
+    col.borrarUltimo()
 
+    return  obtener
 
+#---------------- sacar dato y eliminar de la cola el mensaje
+@app.route('/postorden',methods=['POST'])
+def arbol():
+    parametro = str(request.form['postorden'])
+    cont =0
+    for separar in parametro:
+        if str(separar)!="(" | separar!=")":
+            ordenacion.agregar(ordenacion,str(separar))
+            cont = cont+1
+
+    dato =str(ordenacion.InOrden() )
+    return  dato
 #--------------- Responder mensajes metodo post---------------
 @app.route('/respuesta',methods=['POST'])
 def responder():

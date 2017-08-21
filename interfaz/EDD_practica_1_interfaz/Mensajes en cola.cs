@@ -1,5 +1,6 @@
 ﻿using RestSharp;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,29 +21,59 @@ namespace EDD_practica_1_interfaz
             InitializeComponent();
         }
 
-       
 
+        ArrayList orden = new ArrayList();
 
         private void button1_Click(object sender, EventArgs e)
         {
-            respuesta();
-            //operar();
+            //respuesta();
+            operar();
         }
 
 
-        public static void operar() {
+        public  void operar() {
 
             // opero los mensajes en cola y luego voy llamando al metdo para reponder
             //la cola tiene que estar visualizada en graphviz y tiene que 
             //irse actulizando cuando se vaya operado  hasta vaciarse
+            try
+            {           // cambiar la ip con la que nos dan
+
+                var nodo = new RestClient("http://127.0.0.1:5000/sacarcola");
+                var metodo = new RestRequest("/", Method.POST);
+
+                IRestResponse responder = nodo.Execute(metodo);
+                var respuesta = responder.Content;
+                MessageBox.Show(respuesta.ToString());
+                // *-------------- enviado para postorden
+                string res = respuesta.ToString();
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("La peticion de mensaje fue rechazada por el nodo ");
+
+            }
             
+           
 
 
 
 
 
 
-            respuesta();
+
+
+
+
+
+
+           // respuesta();
 
         }
 

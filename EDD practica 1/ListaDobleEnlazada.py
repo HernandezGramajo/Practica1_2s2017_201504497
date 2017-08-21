@@ -94,3 +94,6 @@ if __name__ == "__main__":
 
  ## mostrar empezando por los mas antiguos
  listas.listarDesdeCola()
+ print ("------------")
+ listas.borrarUltimo()
+ listas.listarDesdeCola()

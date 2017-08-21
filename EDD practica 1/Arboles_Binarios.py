@@ -42,7 +42,7 @@ class Arbol:
         if arbol.izquierda!=None:
             self.inOrIzquierda(arbol)
         print (arbol.info )
-
+        return arbol.info
         if arbol.derecha!=None:
             self.inOrIDerecha(arbol)
 
@@ -65,21 +65,14 @@ class Arbol:
     def postIDerecha(self,arbol):
         self.PostOrden(arbol.derecha)
 
+    def arreglar (self,dato):
+        s =str(dato)
+        cont =0
+        for w in s:
+            if  cont==0:
+                arbol = Arbol(None, w)
+                cont=1
+            else:
 
-
-arbol = Arbol(None,2)
-arbol.agregar(arbol,3)
-arbol.agregar(arbol,"+")
-arbol.agregar(arbol,"*")
-arbol.agregar(arbol,4)
-arbol.agregar(arbol,"-")
-arbol.agregar(arbol,7)
-print ("PreOrden")
-arbol.preOrden(arbol)
-print ("")
-print ("InOrden")
-arbol.InOrden(arbol)
-print ("")
-print ("PostOrden")
-arbol.PostOrden(arbol)
+             arbol.agregar(arbol, w)
 
