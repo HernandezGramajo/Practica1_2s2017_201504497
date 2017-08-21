@@ -21,6 +21,7 @@ namespace EDD_practica_1_interfaz
         {
 
           Dashboard frm = new Dashboard();
+           
             frm.Show();
 
         }

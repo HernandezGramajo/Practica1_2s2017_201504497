@@ -51,7 +51,7 @@ namespace EDD_practica_1_interfaz
             try
             {           // cambiar la ip con la que nos dan
 
-                var nodo = new RestClient("http://127.0.0.1:5000/resultado");
+                var nodo = new RestClient("http://127.0.0.1:5000/respuesta");
                 var metodo = new RestRequest("/", Method.POST);
 
                 metodo.AddParameter("inorden", "((21-17)+ (4*2))");

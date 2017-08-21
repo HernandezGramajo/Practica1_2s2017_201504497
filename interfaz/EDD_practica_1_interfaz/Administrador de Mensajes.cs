@@ -25,6 +25,8 @@ namespace EDD_practica_1_interfaz
 
 
         static string ipserver = "";
+        static int contador = 0;
+
         ArrayList msip = new ArrayList();
          ArrayList mstex = new ArrayList();
 
@@ -32,6 +34,7 @@ namespace EDD_practica_1_interfaz
         {
             Mensajes_en_cola cola = new Mensajes_en_cola();
             cola.Show();
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -103,7 +106,7 @@ namespace EDD_practica_1_interfaz
 
                     MessageBox.Show(respuesta.ToString());
 
-
+                    contador++;
 
                 }
                 catch (Exception ex)

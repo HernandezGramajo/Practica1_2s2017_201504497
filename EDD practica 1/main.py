@@ -48,13 +48,24 @@ def responder():
      parametro = str(request.form['inorden'])
      parametro1 = str(request.form['postorden'])
      parametro2 = str(request.form['resultado'])
-     contenido = parametro + ","+ parametro1 +","+parametro2
+     contenido =str( parametro + ","+ parametro1 +","+parametro2)
      listd.insertarPrimero(contenido)
-    # saco los datos des pues de haberlos pasado e  la pila y
-    #el se almacenan en una lista doble
+
      return "true"
 
+#------------------------------LIsta doble recientes
+@app.route('/orden',methods=['POST'])
+def orden():
+   recientes = str (listd.listar())
 
+   return recientes
+
+#------------------------------LIsta doble antiguos
+@app.route('/ordenant',methods=['POST'])
+def ordenan():
+   recientes = str (listd.listarDesdeCola())
+
+   return recientes
 
 
 

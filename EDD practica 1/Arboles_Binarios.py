@@ -67,12 +67,13 @@ class Arbol:
 
 
 
-arbol = Arbol(None,0)
-arbol.agregar(arbol,100)
-arbol.agregar(arbol,58)
-arbol.agregar(arbol,69)
-arbol.agregar(arbol,34)
-arbol.agregar(arbol,300)
+arbol = Arbol(None,2)
+arbol.agregar(arbol,3)
+arbol.agregar(arbol,"+")
+arbol.agregar(arbol,"*")
+arbol.agregar(arbol,4)
+arbol.agregar(arbol,"-")
+arbol.agregar(arbol,7)
 print ("PreOrden")
 arbol.preOrden(arbol)
 print ("")

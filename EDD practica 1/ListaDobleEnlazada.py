@@ -38,15 +38,17 @@ class Lista:
         temporal = self.cabeza
         while temporal!=None:
             print(temporal.verNodo())
+            p=temporal.verNodo()
             temporal = temporal.siguiente
-
+        return p
 
     def listarDesdeCola(self):
         temporal=self.cola
         while temporal !=None:
             print temporal.verNodo()
+            p=temporal.verNodo()
             temporal = temporal.anterior
-
+        return p
 
     def borrarPrimero(self):
         if self.vacia()==False:
@@ -76,8 +78,8 @@ class Lista:
                 temporal = actual.siguiente
                 anterior.siguiente=actual.siguiente
                 temporal.anterior=anterior
-if __name__ == "__main__":
 
+if __name__ == "__main__":
 
 
  listas = Lista()

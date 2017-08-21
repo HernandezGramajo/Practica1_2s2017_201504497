@@ -41,8 +41,12 @@ class Cola:
     def listarDesdeCola(self):
         temporal=self.cola
         while temporal !=None:
+            paso=""+ str(temporal.verNodo())+ ""
+
             print temporal.verNodo()
             temporal = temporal.anterior
+
+        return paso
 
 
 
