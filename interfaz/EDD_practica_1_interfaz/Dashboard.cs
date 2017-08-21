@@ -87,7 +87,7 @@ namespace EDD_practica_1_interfaz
 
 
 
-                    string url = "http://127.0.0.1:5000/conectado";
+                    string url = "http://"+nodoip[i]+":5000/conectado";
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                     HttpWebResponse respuesta = (HttpWebResponse)request.GetResponse();
                     StreamReader red = new StreamReader(respuesta.GetResponseStream(), Encoding.ASCII);
@@ -106,17 +106,14 @@ namespace EDD_practica_1_interfaz
                
 
             }
+
             for (int i = 0; i < nodoip.Count; i++)
             {
-                //      DataGriv.Rows.Add(nodos[i], nodoip[i], nodomasc[i], estadonodo[i]);
+                  DataGriv.Rows.Add(nodos[i], nodoip[i], nodomasc[i], estadonodo[i]);
+                
                 MessageBox.Show(nodos[i].ToString()+" "+ nodoip[i].ToString() + " " + nodomasc[i].ToString() + " " + estadonodo[i].ToString());
             }
 
-            ThreadStart delegado = new ThreadStart(llamadaip);
-            Thread hilo = new Thread(delegado);
-
-            Thread.Sleep(20000);
-            hilo.Start();
 
 
 
@@ -130,7 +127,7 @@ namespace EDD_practica_1_interfaz
             {
                
 
-                var nodo = new RestClient("http://192.168.1.15:5000/nuevaip");
+                var nodo = new RestClient("http://127.0.0.1:5000/nuevaip");
                 var metodo = new RestRequest("/", Method.POST);
                 metodo.AddParameter("iplocal", iplocal);
                 metodo.AddParameter("mascara", masc);

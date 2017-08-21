@@ -97,7 +97,7 @@ namespace EDD_practica_1_interfaz
                 try
                 {
 
-                    var nodo = new RestClient("http://127.0.0.1:5000/mensaje");
+                    var nodo = new RestClient("http://" + msip[i]+":5000/mensaje");
                     var metodo = new RestRequest("/", Method.POST);
 
                     metodo.AddParameter("inorden", mstex[i]);

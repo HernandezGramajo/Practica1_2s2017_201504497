@@ -1,7 +1,6 @@
 
 import json
 from flask import Flask,request,Response
-from LeeJson import  ljson
 import os
 from cola import  Cola
 col =Cola()
@@ -11,8 +10,6 @@ from Arboles_Binarios import Arbol
 ordenacion =Arbol(None,"")
 
 app =Flask("Prueba")
-#----------------Default-----------------------------------------------------------
-l=ljson()
 
 @app.route('/metodopost',methods=['POST'])
 def carga():
@@ -105,15 +102,9 @@ def datos_json():
 ###-------------------------- ENVAR RUTA ------------------------------------------------
 if __name__ == '__main__':
     app.run(
-#       debug=True, host='0.0.0.0'
+      debug=True, host='0.0.0.0'
 
     )
-   # cool.app.run(
-   # host=cool.app.config.get("HOST", "localhost"),
-   # port=cool.app.config.get("PORT", 9000)
-
-
-
 
 
 
